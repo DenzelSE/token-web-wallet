@@ -28,7 +28,18 @@ function App() {
       );
       const tokens = await provider.send("qn_getWalletTokenBalance",{
         wallet: address,
-        contracts: []
+        // contracts: []
+        contracts: [
+          "0xdAC17F958D2ee523a2206206994597C13D831ec7",//USdT
+          "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",//BNB
+          "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",//USDC
+          "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84", //stETH
+          "0x582d872A1B094FC48F5DE31D3B73F2D9bE47def1",//TONCOIN
+          "",
+          "",
+
+
+        ]
       });
       return tokens;
     };
@@ -67,9 +78,13 @@ function App() {
             <tbody className='divide-y divide-gray-200'>
               {tokens.map((token, index) => (
                 <tr key={index}>
-                  <td className='whitespace-nowrap px-4 py-4 text-blue-500'>{token.name}</td>
-                  <td className='whitespace-nowrap px-4 py-4 text-blue-500'>{token.symbol}</td>
-                  <td className='whitespace-nowrap px-4 py-4 text-blue-500'>{ethers.formatUnits(token.amount, token.decimals)}</td>
+                    {token.symbol && (
+                      <>
+                      <td className='whitespace-nowrap px-4 py-4 text-blue-500'>{token.name}</td>
+                      <td className='whitespace-nowrap px-4 py-4 text-blue-500'>{token.symbol}</td>
+                      <td className='whitespace-nowrap px-4 py-4 text-blue-500'>{ethers.formatUnits(token.amount, token.decimals)}</td>
+                      </>
+                    )}
                 </tr>
               ))}
             </tbody>
@@ -77,6 +92,6 @@ function App() {
           </div>
       ) }
     </div>
-    )
+    )  
 }
 export default App;
